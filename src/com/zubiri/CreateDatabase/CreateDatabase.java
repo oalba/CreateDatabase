@@ -16,12 +16,12 @@ import java.sql.*;
 public class CreateDatabase extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost/";
+	//static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+	//static final String DB_URL = "jdbc:mysql://localhost/";
 
 	//  Database credentials
-	static final String USER = "root";
-	static final String PASS = "zubiri";
+	//static final String USER = "root";
+	//static final String PASS = "zubiri";
 	   
 	Connection conn = null;
 	Statement stmt = null;
@@ -55,7 +55,7 @@ public class CreateDatabase extends HttpServlet {
 
 		      //STEP 3: Open a connection
 		      System.out.println("Connecting to database...");
-		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		      conn = DriverManager.getConnection("jdbc:mysql://localhost/", "root", "zubiri");
 
 		      //STEP 4: Execute a query
 		      System.out.println("Creating database...");
@@ -76,8 +76,7 @@ public class CreateDatabase extends HttpServlet {
 		      
 		      
 		      
-		      stmt.executeUpdate("INSERT INTO USER (ID,USER,PASSWORD) VALUES ('" + 
-		        request.getParameter("number") + "', '" + request.getParameter("nombre") + "','" + request.getParameter("password") + "')");
+		      stmt.executeUpdate("INSERT INTO USER (USER,PASSWORD) VALUES ('" + request.getParameter("nombre") + "','" + request.getParameter("password") + "')");
 
 		      String sqlselect = "SELECT * FROM USER";
 		      ResultSet rs = stmt.executeQuery(sqlselect);
@@ -86,18 +85,18 @@ public class CreateDatabase extends HttpServlet {
 		      out.print("</head>");
 		      out.print("<body>");
 		      out.println("<table align='center' width='40%' border='10' >  ");
-		      out.println("<td><FONT COLOR='#00BFFF' SIZE='5'>	ID</FONT> </td>");
+		      //out.println("<td><FONT COLOR='#00BFFF' SIZE='5'>	ID</FONT> </td>");
 		      out.println("<td><FONT COLOR='#00BFFF' SIZE='5'>	USER</FONT> </td>");
 		      out.println("<td><FONT COLOR='#00BFFF' SIZE='5'> PASSWORD</FONT> </td>");
 		      out.println("</tr>");
 		      while (rs.next()) {
-		    	Integer idselect = rs.getInt("ID");
+		    	//Integer idselect = rs.getInt("ID");
 		    	String userselect = rs.getString("USER");
 		        String passwordselect = rs.getString("PASSWORD");
 		        
 
 		        out.println("<tr>");
-		        out.println("<td> <FONT COLOR='#58FA58' SIZE='3'>" + idselect + "</FONT></td>");
+		        //out.println("<td> <FONT COLOR='#58FA58' SIZE='3'>" + idselect + "</FONT></td>");
 		        out.println("<td> <FONT COLOR='#58FA58' SIZE='3'>" + userselect + "</FONT></td>");
 		        out.println("<td> <FONT COLOR='#58FA58' SIZE='3'>" + passwordselect + "</FONT></td>");
 		        out.println("</tr>");
